@@ -1,0 +1,5 @@
+2020-02-10 09:38:37,556 DEBUG logPack.SampleFile [main] Hello this is debug
+2020-02-10 09:38:37,559 INFO logPack.SampleFile [main] Hello this is an info message
+2020-02-10 09:38:37,559 WARN logPack.SampleFile [main] sample warn message
+2020-02-10 09:38:37,559 ERROR logPack.SampleFile [main] Sample error message
+2020-02-10 09:38:37,559 FATAL logPack.SampleFile [main] Sample fatal message
