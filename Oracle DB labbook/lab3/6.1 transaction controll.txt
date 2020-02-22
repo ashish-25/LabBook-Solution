@@ -1,0 +1,175 @@
+1.	Insert rows with the following data into the Customer table. 6000, John, #115 Chicago, #115 Chicago, M, 25, 7878776, 10000
+•	6001, Jack, #116 France, #116 France, M, 25, 434524, 20000
+•	6002, James, #114 New York, #114 New York, M, 45, 431525, 15000.50
+Use parameter substitution.
+
+SQL> insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (&customerid,&customername,&address1,&address2,&gender,&age,&phoneno);
+Enter value for customerid: 6000
+Enter value for customername: 'john'
+Enter value for address1: '#115 chicago'
+Enter value for address2: '#115 chicago'
+Enter value for gender: 'm'
+Enter value for age: 25
+Enter value for phoneno: 7878776
+old   1: insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (&customerid,&customername,&address1,&address2,&gender,&age,&phoneno)
+new   1: insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (6000,'john','#115 chicago','#115 chicago','m',25,7878776)
+
+1 row created.
+
+SQL> insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (&customerid,&customername,&address1,&address2,&gender,&age,&phoneno);
+Enter value for customerid: 60001
+Enter value for customername: 'jack'
+Enter value for address1: '#116 france'
+Enter value for address2: '#116 france'
+Enter value for gender: 'm'
+Enter value for age: 25
+Enter value for phoneno: 434524
+old   1: insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (&customerid,&customername,&address1,&address2,&gender,&age,&phoneno)
+new   1: insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (60001,'jack','#116 france','#116 france','m',25,434524)
+
+1 row created.
+
+SQL> insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (&customerid,&customername,&address1,&address2,&gender,&age,&phoneno);
+Enter value for customerid: 6002
+Enter value for customername: 'james'
+Enter value for address1: '#114 new york'
+Enter value for address2: '#114 new york'
+Enter value for gender: 'm'
+Enter value for age: 45
+Enter value for phoneno: 431525
+old   1: insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (&customerid,&customername,&address1,&address2,&gender,&age,&phoneno)
+new   1: insert into cust_table(customerid,customername,address1,address2,gender,age,phoneno) values (6002,'james','#114 new york','#114 new york','m',45,431525)
+
+1 row created.
+
+SQL> alter table cust_table add sal number(10,2);
+
+Table altered.
+
+SQL> select* from cust_table;
+
+CUSTOMERID CUSTOMERNAME         ADDRESS1
+---------- -------------------- --------------------
+ADDRESS2                       G        AGE    PHONENO        SAL
+------------------------------ - ---------- ---------- ----------
+      6000 john                 #115 chicago
+#115 chicago                   m         25    7878776
+
+     60001 jack                 #116 france
+#116 france                    m         25     434524
+
+      6002 james                #114 new york
+#114 new york                  m         45     431525
+
+
+SQL> update cust_table set sal=10000 where customerid=6000;
+
+1 row updated.
+
+SQL> update cust_table set sal=20000 where customerid=6001;
+
+0 rows updated.
+
+SQL> update cust_table set sal=20000 where customerid=60001;
+
+1 row updated.
+
+SQL> update cust_table set sal=15000.5 where customerid=6002;
+
+1 row updated.
+
+SQL> select* from cust_table;
+
+CUSTOMERID CUSTOMERNAME         ADDRESS1
+---------- -------------------- --------------------
+ADDRESS2                       G        AGE    PHONENO        SAL
+------------------------------ - ---------- ---------- ----------
+      6000 john                 #115 chicago
+#115 chicago                   m         25    7878776      10000
+
+     60001 jack                 #116 france
+#116 france                    m         25     434524      20000
+
+      6002 james                #114 new york
+#114 new york                  m         45     431525    15000.5
+
+2.	Create a Savepoint named ‘SP1’ after third record in the Customer table .
+
+SQL> savepoint sp1;
+
+Savepoint created.
+
+SQL> select* from cust_table;
+
+CUSTOMERID CUSTOMERNAME         ADDRESS1
+---------- -------------------- --------------------
+ADDRESS2                       G        AGE    PHONENO        SAL
+------------------------------ - ---------- ---------- ----------
+      6000 john                 #115 chicago
+#115 chicago                   m         25    7878776      10000
+
+     60001 jack                 #116 france
+#116 france                    m         25     434524      20000
+
+      6002 james                #114 new york
+#114 new york                  m         45     431525    15000.5
+
+
+3.	Insert the below row in the Customer table. 
+6003, John, #114 Chicago, #114 Chicago, M, 45, 439525, 19000.60
+
+
+
+SQL> insert into cust_table values(6003,'john','#114 chicago','#114 chicago','m',45,439525,19000.60);
+
+1 row created.
+
+SQL> select* from cust_table;
+
+CUSTOMERID CUSTOMERNAME         ADDRESS1
+---------- -------------------- --------------------
+ADDRESS2                       G        AGE    PHONENO        SAL
+------------------------------ - ---------- ---------- ----------
+      6000 john                 #115 chicago
+#115 chicago                   m         25    7878776      10000
+
+     60001 jack                 #116 france
+#116 france                    m         25     434524      20000
+
+      6002 james                #114 new york
+#114 new york                  m         45     431525    15000.5
+
+
+CUSTOMERID CUSTOMERNAME         ADDRESS1
+---------- -------------------- --------------------
+ADDRESS2                       G        AGE    PHONENO        SAL
+------------------------------ - ---------- ---------- ----------
+      6003 john                 #114 chicago
+#114 chicago                   m         45     439525    19000.6
+
+4.	Execute rollback statement in such a way that whatever manipulations done before Savepoint sp1 are permanently implemented, and the ones after Savepoint SP1 are not stored as a part of the Customer table. 
+
+SQL> rollback to savepoint sp1;
+
+Rollback complete.
+
+SQL> select* from cust_table;
+
+CUSTOMERID CUSTOMERNAME         ADDRESS1
+---------- -------------------- --------------------
+ADDRESS2                       G        AGE    PHONENO        SAL
+------------------------------ - ---------- ---------- ----------
+      6000 john                 #115 chicago
+#115 chicago                   m         25    7878776      10000
+
+     60001 jack                 #116 france
+#116 france                    m         25     434524      20000
+
+      6002 james                #114 new york
+#114 new york                  m         45     431525    15000.5
+
+
+
+
+
+

@@ -1,0 +1,394 @@
+SQL> insert into Emp values(101,'raj','Asst_prof',1,'20-jan-00',25000,5000,11);
+
+1 row created.
+
+SQL> insert into Emp values(102,'ram','Prof',2,'22-jan-01',25500,10000,11);
+
+1 row created.
+
+SQL> insert into Emp values(103,'sanjay','Sr_prof',2,'22-feb-99',30500,12000,11);
+
+1 row created.
+
+SQL> insert into Emp values(104,'yogesh','Asst_prof',1,'22-feb-02',20500,11000,12);
+
+1 row created.
+
+SQL>
+SQL> insert into Emp values(105,'deepika','Prof',2,'22-feb-07',25500,11900,12);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select *from emp;
+
+    EMPNNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       101 raj        Asst_prof          1 20-JAN-00      25000       5000
+        11
+
+       102 ram        Prof               2 22-JAN-01      25500      10000
+        11
+
+       103 sanjay     Sr_prof            2 22-FEB-99      30500      12000
+        11
+
+
+    EMPNNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+       104 yogesh     Asst_prof          1 22-FEB-02      20500      11000
+        12
+
+       105 deepika    Prof               2 22-FEB-07      25500      11900
+
+
+
+SQL> insert into designation_master values(201,'Professor');
+
+1 row created.
+
+SQL> insert into designation_master values(201,'Assistant_Professor');
+insert into designation_master values(201,'Assistant_Professor')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYS.SYS_C007306) violated
+
+
+SQL> insert into designation_master values(202,'Assistant_Professor');
+
+1 row created.
+
+SQL> insert into designation_master values(203,'Senior_Professor');
+
+1 row created.
+
+DESIGN_CODE DESIGN_NAME
+----------- --------------------------------------------------
+        201 Professor
+        202 Assistant_Professor
+        203 Senior_Professor
+
+
+SQL> insert into department_master values(91,'CSE');
+
+1 row created.
+
+Commit complete.
+SQL> insert into department_master values(92,'IT');
+
+1 row created.
+
+Commit complete.
+SQL> insert into department_master values(93,'EEE');
+
+1 row created.
+
+Commit complete.
+SQL> insert into department_master values(94,'ECE');
+
+1 row created.
+
+Commit complete.
+SQL> insert into department_master values(95,'MECH');
+
+1 row created.
+
+Commit complete.
+
+SQL> select* from department_master;
+
+ DEPT_CODE DEPT_NAME
+---------- --------------------------------------------------
+        91 CSE
+        92 IT
+        93 EEE
+        94 ECE
+        95 MECH
+
+
+
+SQL> insert into Student_master values(61,'ashish',91,'25-dec-98','Hydershakote Hyderabad');
+
+1 row created.
+
+SQL> insert into Student_master values(62,'vijay',92,'31-may-98','suncity Hyderabad');
+
+1 row created.
+
+SQL> insert into Student_master values(63,'prady',91,'23-apr-98','begumpet Hyderabad');
+
+1 row created.
+
+SQL> insert into Student_master values(64,'meghana',93,'3-mar-98','kottapet Hyderabad');
+
+1 row created.
+
+SQL> insert into Student_master values(65,'rithesh',94,'23-may-98','himayath nagar');
+
+1 row created.
+
+SQL> insert into Student_master values(66,'spoorthy',95,'20-sep-98','uppal');
+
+1 row created.
+
+SQL> insert into Student_master values(67,'aman',92,'20-nov-98','suncity');
+
+1 row created.
+
+SQL> select * from student_master;
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+STUDENT_D
+---------
+STUDENT_ADDRESS
+--------------------------------------------------------------------------------
+          61 ashish                                                     91
+25-DEC-98
+Hydershakote Hyderabad
+
+          62 vijay                                                      92
+31-MAY-98
+suncity Hyderabad
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+STUDENT_D
+---------
+STUDENT_ADDRESS
+--------------------------------------------------------------------------------
+
+          63 prady                                                      91
+23-APR-98
+begumpet Hyderabad
+
+          64 meghana                                                    93
+03-MAR-98
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+STUDENT_D
+---------
+STUDENT_ADDRESS
+--------------------------------------------------------------------------------
+kottapet Hyderabad
+
+          65 rithesh                                                    94
+23-MAY-98
+himayath nagar
+
+          66 spoorthy                                                   95
+
+STUDENT_CODE STUDENT_NAME                                        DEPT_CODE
+------------ -------------------------------------------------- ----------
+STUDENT_D
+---------
+STUDENT_ADDRESS
+--------------------------------------------------------------------------------
+20-SEP-98
+uppal
+
+          67 aman                                                       92
+20-NOV-98
+suncity
+
+
+7 rows selected.
+SQL> insert into Student_marks values(61,4,79,60,89);
+
+1 row created.
+
+SQL> insert into Student_marks values(62,4,68,55,89);
+
+1 row created.
+
+SQL> insert into Student_marks values(63,4,65,50,90);
+
+1 row created.
+
+SQL> insert into Student_marks values(64,4,66,56,60);
+
+1 row created.
+
+SQL> insert into Student_marks values(65,4,80,80,80);
+
+1 row created.
+
+SQL> insert into Student_marks values(66,4,40,68,80);
+
+1 row created.
+
+SQL> insert into Student_marks values(67,4,70,68,50);
+
+1 row created.
+
+SQL> select * from student_marks;
+
+STUDENT_CODE STUDENT_YEAR   SUBJECT1   SUBJECT2   SUBJECT3
+------------ ------------ ---------- ---------- ----------
+          61            4         79         60         89
+          62            4         68         55         89
+          63            4         65         50         90
+          64            4         66         56         60
+          65            4         80         80         80
+          66            4         40         68         80
+          67            4         70         68         50
+
+7 rows selected.
+SQL> insert into Staff_master values(501,'mohan',201,91,'21-jun-03','12-jan-67','mumbai',21,55000);
+
+1 row created.
+
+SQL> insert into Staff_master values(502,'ramesh',202,93,'25-jan-04','10-jul-69','Hyderabad',22,57000);
+
+1 row created.
+
+SQL> insert into Staff_master values(503,'suresh',203,95,'1-feb-05','10-aug-70','Hyderabad',23,52000);
+
+1 row created.
+
+SQL> insert into Staff_master values(504,'ranga',201,92,'1-feb-03','1-sep-70','Hyderabad',21,50000);
+
+1 row created.
+
+SQL> insert into Staff_master values(505,'mohan_raj',202,93,'21-may-05','29-dec-72','Hyderabad',22,53000);
+
+1 row created.
+
+SQL> select * from staff_master;
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       501 mohan                                                      201
+        91 21-JUN-03 12-JAN-67
+mumbai
+        21      55000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       502 ramesh                                                     202
+        93 25-JAN-04 10-JUL-69
+Hyderabad
+        22      57000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       503 suresh                                                     203
+        95 01-FEB-05 10-AUG-70
+Hyderabad
+        23      52000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       504 ranga                                                      201
+        92 01-FEB-03 01-SEP-70
+Hyderabad
+        21      50000
+
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE HIREDATE  STAFF_DOB
+---------- --------- ---------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+  MGR_CODE  STAFF_SAL
+---------- ----------
+       505 mohan_raj                                                  202
+        93 21-MAY-05 29-DEC-72
+Hyderabad
+        22      53000
+
+SQL> insert into book_master values(1001,'interpretation of computer programs',1999,'Harold Abelson');
+
+1 row created.
+
+SQL> insert into book_master values(1002,'core java fundemantals vol-1',1990,'cay s horstmann');
+
+1 row created.
+
+SQL> insert into book_master values(1003,'let us c',1990,'balaguru swamy');
+
+1 row created.
+
+SQL> select * from book_master;
+
+ BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR
+---------- -------------------------------------------------- -------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+      1001 interpretation of computer programs                         1999
+Harold Abelson
+
+      1002 core java fundemantals vol-1                                1990
+cay s horstmann
+
+      1003 let us c                                                    1990
+balaguru swamy
+
+SQL> insert into book_transactions values(1001,61,502,'3-dec-19','10-jan-20','20-jan-20');
+
+1 row created.
+
+SQL> insert into book_transactions values(1002,63,503,'3-dec-19','13-jan-20','20-jan-20');
+
+1 row created.
+
+SQL> insert into book_transactions values(1001,62,504,'10-dec-19','10-jan-20','10-jan-20');
+
+1 row created.
+
+SQL> insert into book_transactions values(1003,65,505,'19-dec-19','19-jan-20','10-jan-20');
+
+1 row created.
+
+SQL> insert into book_transactions values(1002,63,504,'29-dec-19','29-jan-20','10-jan-20');
+
+1 row created.
+
+
+SQL> select * from book_transactions;
+
+ BOOK_CODE STUDENT_CODE STAFF_CODE BOOK_ISSU BOOK_EXPE BOOK_ACTU
+---------- ------------ ---------- --------- --------- ---------
+      1001           61        502 03-DEC-19 10-JAN-20 20-JAN-20
+      1002           63        503 03-DEC-19 13-JAN-20 20-JAN-20
+      1001           62        504 10-DEC-19 10-JAN-20 10-JAN-20
+      1003           65        505 19-DEC-19 19-JAN-20 10-JAN-20
+      1002           63        504 29-DEC-19 29-JAN-20 10-JAN-20
+
+

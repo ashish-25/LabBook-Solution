@@ -1,0 +1,359 @@
+1.	Write a query which displays Staff Name,
+ Department Code, Department Name, and Salary for all staff who earns more than 20000.
+
+SQL> select S.staff_name,S.Dept_code,D.Dept_name
+  2  from Staff_master S,Department_Master D
+  3  where S.Dept_code=D.Dept_code
+  4  and S.Staff_sal>20000;
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME
+--------------------------------------------------
+mohan                                                      91
+CSE
+
+ramesh                                                     93
+EEE
+
+suresh                                                     95
+MECH
+
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME
+--------------------------------------------------
+ranga                                                      92
+IT
+
+mohan_raj                                                  93
+EEE
+
+praveen                                                    94
+ECE
+
+
+2.Display Staff Code, Staff Name, Department Name, and his manager’s number and name. Label the columns Staff#, Staff, Mgr#, Manager. 
+
+SQL> select s.staff_code as Staff#,s.staff_name as Staff,d.Dept_name,s.mgr_code from Staff_master s,Department_master d
+  2  where s.dept_code=d.dept_code;
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                            MGR_CODE
+-------------------------------------------------- ----------
+       501 mohan
+CSE                                                        21
+
+       502 ramesh
+EEE                                                        22
+
+       503 suresh
+MECH                                                       23
+
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                            MGR_CODE
+-------------------------------------------------- ----------
+       504 ranga
+IT                                                         21
+
+       505 mohan_raj
+EEE                                                        22
+
+       506 rajesh
+IT                                                         21
+
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                            MGR_CODE
+-------------------------------------------------- ----------
+       507 praveen
+ECE
+
+
+7 rows selected.
+
+3. Create a query that will display Student Code, Student Name, Book Code, and Book Name for all students whose expected book return date is today.
+
+SQL> select s.Student_code,b.book_code,s.student_name,bm.book_name
+  2  from student_master s,book_transactions b,book_master bm
+  3  where s.student_code=b.student_code and b.book_code=bm.book_code and  b.book_expected_return_date='29-jan-20';
+
+STUDENT_CODE  BOOK_CODE STUDENT_NAME
+------------ ---------- --------------------------------------------------
+BOOK_NAME
+--------------------------------------------------
+          63       1002 prady
+core java fundemantals vol-1
+
+4.Create a query that will display Staff Code, Staff Name, Department Name, Designation name, Book Code,
+ Book Name, and Issue Date for only those staff who have taken any book in last 30 days. . 
+ If required, make changes to the table to create such a scenario.
+SQL> select bt.staff_code as "Staff Code",
+  s.staff_name as "Staff Name",
+    d.dept_name as "Department Name",
+    de.design_name as "Designation Name",
+    bt.book_code as "Book Code",
+    b.book_name as "Book Name",
+    bt.book_issue_date as "Issue Date"
+    from Book_Transactions bt,
+    Book_master b,Staff_Master s,
+   Department_Master d,Designation_Master de
+  where s.staff_code=bt.staff_code
+   and bt.book_code=b.book_code
+   and s.dept_code=d.dept_code
+   and de.design_code=s.design_code
+   and bt.book_issue_date between
+   '01-dec-2019' and '1-jan-20';
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Department Name
+--------------------------------------------------
+Designation Name                                    Book Code
+-------------------------------------------------- ----------
+Book Name                                          Issue Dat
+-------------------------------------------------- ---------
+       504 ranga
+IT
+Professor                                                1001
+interpretation of computer programs                10-DEC-19
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Department Name
+--------------------------------------------------
+Designation Name                                    Book Code
+-------------------------------------------------- ----------
+Book Name                                          Issue Dat
+-------------------------------------------------- ---------
+       504 ranga
+IT
+Professor                                                1002
+core java fundemantals vol-1                       29-DEC-19
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Department Name
+--------------------------------------------------
+Designation Name                                    Book Code
+-------------------------------------------------- ----------
+Book Name                                          Issue Dat
+-------------------------------------------------- ---------
+       502 ramesh
+EEE
+Assistant_Professor                                      1001
+interpretation of computer programs                03-DEC-19
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Department Name
+--------------------------------------------------
+Designation Name                                    Book Code
+-------------------------------------------------- ----------
+Book Name                                          Issue Dat
+-------------------------------------------------- ---------
+       505 mohan_raj
+EEE
+Assistant_Professor                                      1003
+let us c                                           19-DEC-19
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Department Name
+--------------------------------------------------
+Designation Name                                    Book Code
+-------------------------------------------------- ----------
+Book Name                                          Issue Dat
+-------------------------------------------------- ---------
+       503 suresh
+MECH
+Senior_Professor                                         1002
+core java fundemantals vol-1                       03-DEC-19
+
+
+
+5.	Generate a report which contains the following information.
+Staff Code, Staff Name, Designation Name, Department, Book Code, Book Name,
+Author, Fine For the staff who has not returned the book. Fine will be calculated as Rs. 5 per day. 
+Fine = 5 * (No. of days = Current Date – Expected return date). Include records in the table to suit this problem statement
+
+
+select bt.staff_code as "Staff Code",
+    s.staff_name as "Staff Name",
+    de.design_name as "Designation Name",
+    d.dept_name as "Department Name",
+    bt.book_code as "Book Code",
+    b.book_name as "Book Name",
+    b.book_pub_author as Author,
+    ((SYSDATE-bt.book_actual_return_date)*5) as Fine
+    from Book_Transactions bt,
+  Book_master b,Staff_Master s,
+   Department_Master d,Designation_Master de
+   where s.staff_code=bt.staff_code
+   and bt.book_code=b.book_code
+  and s.dept_code=d.dept_code
+   and de.design_code=s.design_code;
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       504 ranga
+Professor
+IT                                                       1001
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+interpretation of computer programs
+Harold Abelson                                     73.3768519
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       504 ranga
+Professor
+IT                                                       1002
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+core java fundemantals vol-1
+cay s horstmann                                    73.3768519
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       502 ramesh
+Assistant_Professor
+EEE                                                      1001
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+interpretation of computer programs
+Harold Abelson                                     23.3768519
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       505 mohan_raj
+Assistant_Professor
+EEE                                                      1003
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+let us c
+balaguru swamy                                     73.3768519
+
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+       503 suresh
+Senior_Professor
+MECH                                                     1002
+
+Staff Code Staff Name
+---------- --------------------------------------------------
+Designation Name
+--------------------------------------------------
+Department Name                                     Book Code
+-------------------------------------------------- ----------
+Book Name
+--------------------------------------------------
+AUTHOR                                                   FINE
+-------------------------------------------------- ----------
+core java fundemantals vol-1
+cay s horstmann                                    23.3768519
+
+6.	List Staff Code, Staff Name, and Salary for those who are getting less than the average salary of organization.
+SQL> select Staff_code,staff_name,Staff_sal from staff_master
+  2  where staff_sal<(select avg(staff_sal) from staff_master);
+
+STAFF_CODE STAFF_NAME                                          STAFF_SAL
+---------- -------------------------------------------------- ----------
+       506 rajesh                                                  20000
+
+
+7.	Display Author Name, Book Name for those authors who wrote more than one book.
+
+
+
+

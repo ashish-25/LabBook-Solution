@@ -1,0 +1,134 @@
+Emp:-
+	create table Emp( Empnno Number(4) Not Null Primary Key,
+			Ename Varchar2(10),
+			job Varchar2(9),
+			mgr Number(4),
+			Hiredate Date,
+			Sal Number(7,2),
+			Comm Number(7,2),
+			Deptno Number(2));
+
+Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNNO                                    NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+
+
+Designation_Master:-
+
+		create table Designation_Master(Design_code Number(3) Not Null Primary Key,
+						Design_name Varchar2(50));
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DESIGN_CODE                               NOT NULL NUMBER(3)
+ DESIGN_NAME                                        VARCHAR2(50)
+
+Department_Master:-
+
+	create table Department_Master(Dept_Code Number(2) Not Null Primary Key,Dept_name Varchar2(50));
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_CODE                                 NOT NULL NUMBER(2)
+ DEPT_NAME                                          VARCHAR2(50)
+
+Student_Master:-
+	create table Student_Master(Student_Code Number(6) Not Null Primary Key,
+					Student_name Varchar2(50) Not Null,
+  					Dept_Code Number(2),
+					 Student_dob Date,
+					 Student_Address Varchar2(240),
+					Foreign Key(Dept_Code) References Department_Master(Dept_Code));
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_CODE                              NOT NULL NUMBER(6)
+ STUDENT_NAME                              NOT NULL VARCHAR2(50)
+ DEPT_CODE                                          NUMBER(2)
+ STUDENT_DOB                                        DATE
+ STUDENT_ADDRESS                                    VARCHAR2(240)
+
+SQL> create table Student_Marks(Student_Code Number(6),Student_Year Number Not Null,
+  2  Subject1 Number(3),Subject2 Number(3),Subject3 Number(3),foreign key(Student_code) references Student_Master(Student_code));
+
+Table created.
+
+SQL> Desc Student_marks
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_CODE                                       NUMBER(6)
+ STUDENT_YEAR                              NOT NULL NUMBER
+ SUBJECT1                                           NUMBER(3)
+ SUBJECT2                                           NUMBER(3)
+ SUBJECT3                                           NUMBER(3)
+
+Staff-Master:-
+		create table Staff_Master(Staff_code Number(8) Not Null Primary Key,
+                            Staff_Name Varchar2(50) Not Null,
+                            Design_code Number,
+                            Dept_code Number,
+                            Hiredate Date,
+                            Staff_dob Date,
+                            Staff_address Varchar2(240),
+                            Mgr_code Number(8),
+                            Staff_sal Number(10,2),
+                            Foreign Key(Design_code) References Designation_Master(Design_code),
+                            Foreign Key(Dept_code) References Department_Master(Dept_code));
+
+SQL> desc Staff_master
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STAFF_CODE                                NOT NULL NUMBER(8)
+ STAFF_NAME                                NOT NULL VARCHAR2(50)
+ DESIGN_CODE                                        NUMBER
+ DEPT_CODE                                          NUMBER
+ HIREDATE                                           DATE
+ STAFF_DOB                                          DATE
+ STAFF_ADDRESS                                      VARCHAR2(240)
+ MGR_CODE                                           NUMBER(8)
+ STAFF_SAL                                          NUMBER(10,2)
+
+SQL> create table Book_Master(Book_Code Number(10) Not Null Primary Key,
+  2  Book_Name Varchar2(50),
+  3  Book_pub_year Number,
+  4  Book_pub_author Varchar2(50) Not Null);
+
+Table created.
+
+SQL> DESC book_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BOOK_CODE                                 NOT NULL NUMBER(10)
+ BOOK_NAME                                          VARCHAR2(50)
+ BOOK_PUB_YEAR                                      NUMBER
+ BOOK_PUB_AUTHOR                           NOT NULL VARCHAR2(50)
+
+SQL> create table Book_transactions(Book_Code Number,
+  2    Student_code Number,
+  3      Staff_code Number,
+  4      Book_Issue_date Date Not Null,
+  5      Book_expected_return_date Date Not Null,
+  6      Book_actual_return_date Date,
+  7      Foreign key(Book_Code) references Book_Master(Book_Code),
+  8      Foreign key(Student_Code) references Student_Master(Student_code),
+  9      Foreign key(Staff_Code) references Staff_Master(Staff_code));
+
+Table created.
+
+SQL> desc book_transactions
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BOOK_CODE                                          NUMBER
+ STUDENT_CODE                                       NUMBER
+ STAFF_CODE                                         NUMBER
+ BOOK_ISSUE_DATE                           NOT NULL DATE
+ BOOK_EXPECTED_RETURN_DATE                 NOT NULL DATE
+ BOOK_ACTUAL_RETURN_DATE                            DATE
